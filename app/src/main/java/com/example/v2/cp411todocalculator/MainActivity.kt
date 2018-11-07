@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
      * may be best to switch to a
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
+    //TODO: Codelab MDC:101,102,111 name of widget and what they do on quiz
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     /**
