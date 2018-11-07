@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.cal1.*
 import kotlinx.android.synthetic.main.cal1.view.*
 
 class Cal1 : Fragment() {
-    internal var userBill = 0.0
-    internal var userTip = 0.0
-    internal var userTax = 0.0
+    var userBill = 0.0
+    var userTip = 0.0
+    var userTax = 0.0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.cal1, container, false)
