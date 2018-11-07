@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
      * may be best to switch to a
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
+    //TODO: Codelab MDC:101,102,111 name of widget and what they do on quiz
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     /**
@@ -89,13 +90,19 @@ class MainActivity : AppCompatActivity() {
                 1 -> {
                     return Cal2()
                 }
+                2 -> {
+                    return Cal3()
+                }
+                3 -> {
+                    return Cal4()
+                }
                 else -> return null
             }
         }
 
         override fun getCount(): Int {
-            // Show 3 total pages.
-            return 2
+            // Show 4 total pages.
+            return 4
         }
     }
 }

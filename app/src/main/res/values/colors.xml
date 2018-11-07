@@ -2,5 +2,10 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574b</color>
-    <color name="colorAccent">#dbdbdb</color>
+    <color name="colorAccent">#b7b7b7</color>
+
+    <color name="underWeight">#418ac9</color>
+    <color name="normal">#5bb75c</color>
+    <color name="overWeight">#eeac4e</color>
+    <color name="obese">#be1e1a</color>
 </resources>
