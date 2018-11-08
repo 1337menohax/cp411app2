@@ -1,23 +1,34 @@
 <resources>
-    <string name="app_name">TODO:calculator</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="tab_text_4">Tab 4</string>
+    <string name="app_name">//TODO: Calculator</string>
+    <string name="tab_text_1">TIP/TAX</string>
+    <string name="tab_text_2">% DIFF</string>
+    <string name="tab_text_3">Fraction</string>
+    <string name="tab_text_4">BMI</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
-    <string name="s_sec1_label">Tip Calculator</string>
-    <string name="s_bill_amount">Bill Amount</string>
-    <string name="s_tip">Tip %</string>
-    <string name="s_tax">Sale Tax %</string>
-    <string name="s_total">Total</string>
-    <string name="s_calculate">Calculate</string>
-    <string name="s_default_total">$0.00</string>
-    <string name="s_defaultSaleTax">7.25</string>
-    <string name="s_defaultAmount">0.0</string>
-    <string name="s_defaultTip">15</string>
 
-    <string name="sl_sec2_label">Standard BMI</string>
+    <string name="sl_sec1_label">Tip Calculator</string>
+    <string name="sl_bill_amount">Bill Amount</string>
+    <string name="sl_tip">Tip %</string>
+    <string name="sl_tax">Sale Tax %</string>
+    <string name="sl_total">Total</string>
+    <string name="sl_calculate">Calculate</string>
+    <string name="sl_default_total">$0.00</string>
+    <string name="sl_defaultSaleTax">7.25</string>
+    <string name="sl_defaultAmount">0.0</string>
+    <string name="sl_defaultTip">15</string>
+
+    <string name="sl_sec2_label">% Different</string>
+    <string name="sl_from_input">% increase/decrease from</string>
+    <string name="sl_to_input">To</string>
+    <string name="sl_answer">Answer</string>
+    <string name="sl_default_perc">0.0% increase/decrease</string>
+    <string name="sl_invalid_perc">\"% from\" cannot be 0</string>
+
+    <string name="sl_sec3_label">Fraction Calculator</string>
+
+
+    <string name="sl_sec4_label">Standard BMI</string>
     <string name="sl_height">Height</string>
     <string name="sl_feet">(Feet)</string>
     <string name="sl_inches">(Inches)</string>
@@ -26,4 +37,5 @@
     <string name="sl_compute_BMI">Compute BMI</string>
     <string name="sl_yourBmi">Your BMI</string>
     <string name="sl_invalid_feet">0</string>
+
 </resources>

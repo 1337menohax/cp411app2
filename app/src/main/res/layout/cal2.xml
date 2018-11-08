@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/section_label"
@@ -20,132 +21,82 @@
         tools:layout_constraintTop_creator="1" />
 
     <Button
-        android:id="@+id/bt_computeBmi"
+        android:id="@+id/bt_perc_calculate"
         android:layout_width="189dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/sl_compute_BMI"
+        android:text="@string/sl_calculate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_height"
+        android:id="@+id/tv_perc_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/sl_height"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/sl_from_input"
+        app:layout_constraintStart_toStartOf="@+id/section_label"
         app:layout_constraintTop_toBottomOf="@+id/section_label" />
 
     <TextView
-        android:id="@+id/tv_feet"
+        android:id="@+id/tv_perc_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:text="@string/sl_feet"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_feet" />
-
-    <TextView
-        android:id="@+id/tv_inches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="260dp"
-        android:text="@string/sl_inches"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_inches" />
-
-    <TextView
-        android:id="@+id/tv_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="140dp"
-        android:text="@string/sl_weight"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="120dp"
+        android:text="@string/sl_to_input"
+        app:layout_constraintStart_toStartOf="@+id/section_label"
         app:layout_constraintTop_toBottomOf="@+id/section_label" />
 
     <TextView
-        android:id="@+id/tv_pound"
+        android:id="@+id/tv_label_perc_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:text="@string/sl_pounds"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_weight" />
-
-    <TextView
-        android:id="@+id/tv_label_yourBmi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="212dp"
-        android:text="@string/sl_yourBmi"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="200dp"
+        android:text="@string/sl_answer"
+        app:layout_constraintStart_toStartOf="@+id/section_label"
         app:layout_constraintTop_toBottomOf="@+id/section_label" />
 
     <EditText
-        android:id="@+id/et_feet"
-        android:layout_width="86dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="80dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toEndOf="@+id/tv_height"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/et_weight"
-        android:layout_width="86dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="160dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toEndOf="@+id/tv_height"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/et_inches"
-        android:layout_width="86dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="80dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toEndOf="@+id/tv_height"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_yourBmi"
+        android:id="@+id/et_perc_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="numberSigned|numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/tv_perc_from"
+        app:layout_constraintTop_toBottomOf="@+id/tv_perc_from" />
+
+    <EditText
+        android:id="@+id/et_perc_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="numberSigned|numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/tv_perc_to"
+        app:layout_constraintTop_toBottomOf="@+id/tv_perc_to" />
+
+    <TextView
+        android:id="@+id/tv_perc_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:gravity="left"
-        android:text="@string/s_defaultAmount"
+        android:text="@string/sl_default_perc"
         android:textDirection="locale"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_label_yourBmi"
-        app:layout_constraintStart_toEndOf="@+id/tv_label_yourBmi" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_label_perc_label"
+        app:layout_constraintStart_toEndOf="@+id/tv_label_perc_label" />
 
-    <TextView
-        android:id="@+id/tv_statusBMI"
-        android:layout_width="110dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="288dp"
-        android:text=""
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintStart_toEndOf="@+id/tv_height"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

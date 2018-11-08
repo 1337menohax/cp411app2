@@ -15,6 +15,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
+import kotlinx.android.synthetic.main.cal3.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,16 +29,18 @@ class MainActivity : AppCompatActivity() {
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
     //TODO: Codelab MDC:101,102,111 name of widget and what they do on quiz
+    //TODO:reset button, auto calculate,about page
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     /**
      * The [ViewPager] that will host the section contents.
      */
     private var mViewPager: ViewPager? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
@@ -52,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
-
     }
 
 
