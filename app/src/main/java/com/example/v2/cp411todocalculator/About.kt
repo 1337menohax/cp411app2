@@ -17,7 +17,7 @@ class About : AppCompatActivity() {
         //Initialize back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //About page content
+        /*About page content*/
         val versionElement = Element()
         versionElement.title = "Version 1.0"
         val aboutPage = AboutPage(this)
@@ -34,7 +34,9 @@ class About : AppCompatActivity() {
         setContentView(aboutPage)
     }
 
-
+    /*FUNC:onOptionsItemSelected
+    * DESC: Return home when user press the arrow back button
+    * */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {

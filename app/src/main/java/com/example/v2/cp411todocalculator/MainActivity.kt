@@ -15,6 +15,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 
+/**Multi-Calculator
+ * DESC: This is a multi calculator designed for CP411 Android development APP 1 project.
+ * INCLUDE: Tip/Tax, Percentage Different, Fraction, BMI, calculators
+ * CREATED BY: Ivan Vu
+ * LAST UPDATE: 08NOV2018*/
+
 class MainActivity : AppCompatActivity() {
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -24,8 +30,7 @@ class MainActivity : AppCompatActivity() {
      * may be best to switch to a
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
-    //TODO: Codelab MDC:101,102,111 name of widget and what they do on quiz
-    //TODO:reset button, auto calculate,about page
+    //TODO: STUDY Codelab MDC:101,102,111 name of widget and what they do on quiz
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     /**
@@ -35,8 +40,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
@@ -64,8 +67,6 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-
-
         return if (id == R.id.action_about) {
             val myIntent = Intent(this@MainActivity, About::class.java)
             this@MainActivity.startActivity(myIntent)

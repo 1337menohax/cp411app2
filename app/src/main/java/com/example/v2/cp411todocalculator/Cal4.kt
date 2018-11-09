@@ -14,8 +14,6 @@ import java.lang.Math.pow
 
 class Cal4 : Fragment() {
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.cal4, container, false)

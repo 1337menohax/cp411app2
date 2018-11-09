@@ -9,7 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cal2.*
-
+/**Percentage Different Calculator
+ * DESC: Calculate the percentage between original number and new number
+ * INPUT:   Original number
+ *          New number
+ *
+ * OUTPUT:  Percentage Different
+ * CREATED BY: Ivan Vu
+ * LAST UPDATE: 08NOV2018
+ * TODO: Put checking IF/ELSE into functions for easy read*/
 
 class Cal2 : Fragment() {
 
@@ -21,6 +29,8 @@ class Cal2 : Fragment() {
         var validFrom= false
         var validTo = false
 
+        //bt_perc_calculate AKA reset button
+        //TODO: change bt_perc_calculate ID to something reset for easy read
         bt_perc_calculate.setOnClickListener {
             et_perc_from.setText("")
             et_perc_to.setText("")
@@ -33,9 +43,6 @@ class Cal2 : Fragment() {
         et_perc_from.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //To check if string is not empty
-                //DO: Set valid flag to true for later calculation
-                //ELSE: Display "invalid input" onto the screen
                 if (et_perc_from.text.toString().isEmpty()|| et_perc_from.text.toString() == "." || et_perc_from.text.toString() == "-") {
                     validFrom = false
                     tv_perc_result.text = "0.0% increase/decrease"
@@ -68,9 +75,6 @@ class Cal2 : Fragment() {
         et_perc_to.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //To check if string is not empty
-                //DO: Set valid flag to true for later calculation
-                //ELSE: Display "invalid input" onto the screen
                 if (et_perc_to.text.toString().isEmpty()|| et_perc_to.text.toString() == "."|| et_perc_to.text.toString() == "-") {
                     validTo = false
                     tv_perc_result.text = "0.0% increase/decrease"
