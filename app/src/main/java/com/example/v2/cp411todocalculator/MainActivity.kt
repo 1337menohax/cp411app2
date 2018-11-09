@@ -19,6 +19,7 @@ import android.view.View
  * DESC: This is a multi calculator designed for CP411 Android development APP 1 project.
  * INCLUDE: Tip/Tax, Percentage Different, Fraction, BMI, calculators
  * CREATED BY: Ivan Vu
+ * CREATED DATE:05NOV2018
  * LAST UPDATE: 08NOV2018*/
 
 class MainActivity : AppCompatActivity() {

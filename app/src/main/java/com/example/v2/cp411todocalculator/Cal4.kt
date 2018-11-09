@@ -12,6 +12,17 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cal4.*
 import java.lang.Math.pow
 
+/**BMI Calculator
+ * DESC: Calculate Body Mass Index(BMI) to see if youre normal
+ * INPUT:   Feet
+ *          Inches
+ *          pound
+ *
+ * OUTPUT:  BMI and BMI status(normal,healthy,underweight, or obese)
+ * CREATED BY: Ivan Vu
+ * CREATED DATE:05NOV2018
+ * LAST UPDATE: 08NOV2018
+ * TODO: put IF/ELSE into function for easy read*/
 class Cal4 : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

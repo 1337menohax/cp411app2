@@ -11,6 +11,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import java.lang.Integer.parseInt
+
 /**Fraction Calculator
  * DESC: Calculate fractions
  * INPUT:   2 Numerators
@@ -18,6 +19,7 @@ import java.lang.Integer.parseInt
  *
  * OUTPUT:  Fraction in reduced form
  * CREATED BY: Ivan Vu
+ * CREATED DATE:05NOV2018
  * LAST UPDATE: 08NOV2018*/
 
 class Cal3 : Fragment(){

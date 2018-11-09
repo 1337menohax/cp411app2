@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cal2.*
+
 /**Percentage Different Calculator
  * DESC: Calculate the percentage between original number and new number
  * INPUT:   Original number
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.cal2.*
  *
  * OUTPUT:  Percentage Different
  * CREATED BY: Ivan Vu
+ * CREATED DATE:05NOV2018
  * LAST UPDATE: 08NOV2018
  * TODO: Put checking IF/ELSE into functions for easy read*/
 

@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cal1.*
+
 /**Tip/Tax Calculator
  * DESC: Calculate total bill amount
  * INPUT:Bill Amount, Tip, Tax
  * OUTPUT: Total price
  * CREATED BY: Ivan Vu
+ * CREATED DATE:05NOV2018
  * LAST UPDATE: 08NOV2018*/
 class Cal1 : Fragment() {
 

@@ -7,7 +7,12 @@ import android.view.MenuItem
 import mehdi.sakout.aboutpage.AboutPage
 import mehdi.sakout.aboutpage.Element
 
-
+/**About Page
+ * DESC: Show the about page using medyo package(google this to know more about this package)
+ *
+ * CREATED BY: Ivan Vu
+ * CREATED DATE:05NOV2018
+ * LAST UPDATE: 08NOV2018*/
 class About : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +29,7 @@ class About : AppCompatActivity() {
                 .isRTL(false)
                 .setImage(R.drawable.about_img)
                 .addItem(versionElement)
-                .addGroup("Broke my app!?!?Good!! now msg me")
+                .addGroup("Found bugs? MSG ME HERE:")
                 .addEmail("vivu493@gmail.com")
                 .addWebsite("https://github.com/1337menohax")
                 .addGitHub("1337menohax/cp411todocalculator")
