@@ -1,8 +1,7 @@
 package com.example.v2.cp411todocalculator
 
+import android.content.Intent
 import android.support.design.widget.TabLayout
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 
@@ -15,9 +14,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.cal3.*
-
 
 class MainActivity : AppCompatActivity() {
     /**
@@ -57,8 +53,6 @@ class MainActivity : AppCompatActivity() {
         mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
     }
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -72,7 +66,9 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
 
 
-        return if (id == R.id.action_settings) {
+        return if (id == R.id.action_about) {
+            val myIntent = Intent(this@MainActivity, About::class.java)
+            this@MainActivity.startActivity(myIntent)
             true
         } else super.onOptionsItemSelected(item)
 
@@ -86,20 +82,20 @@ class MainActivity : AppCompatActivity() {
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment? {
-            when (position) {
+            return when (position) {
                 0 -> {
-                    return Cal1()
+                    Cal1()
                 }
                 1 -> {
-                    return Cal2()
+                    Cal2()
                 }
                 2 -> {
-                    return Cal3()
+                    Cal3()
                 }
                 3 -> {
-                    return Cal4()
+                    Cal4()
                 }
-                else -> return null
+                else -> null
             }
         }
 

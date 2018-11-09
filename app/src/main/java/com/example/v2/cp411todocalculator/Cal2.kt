@@ -2,6 +2,9 @@ package com.example.v2.cp411todocalculator
 import android.support.v4.app.Fragment
 import android.os.Bundle
 import android.support.annotation.Nullable
+import android.support.v4.content.ContextCompat
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,27 +20,87 @@ class Cal2 : Fragment() {
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         var validFrom= false
         var validTo = false
-        bt_perc_calculate.setOnClickListener {
-            if (!et_perc_from.text.toString().isEmpty()) {
-                validFrom = true
-                if(getPercFrom() == 0.0){
-                    tv_perc_result.text = getString(R.string.sl_invalid_perc)
-                    validFrom = false
-                }
-            }
-            if (!et_perc_to.text.toString().isEmpty()) {
-                validTo = true
-            }
-            if (validFrom && validTo) {
-                if(getPercFrom() <= getPercTo()){
-                    tv_perc_result.text = String.format("%.1f", calculateIncrease(getPercFrom(),getPercTo())) +"% increase"
-                }
-                else{
-                    tv_perc_result.text = String.format("%.1f", calculateDecrease(getPercFrom(),getPercTo())) +"% decrease"
-                }
 
-            }
+        bt_perc_calculate.setOnClickListener {
+            et_perc_from.setText("")
+            et_perc_to.setText("")
+            tv_perc_result.text = "0.0% increase/decrease"
+            tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.underWeight))
+            validFrom= false
+            validTo = false
         }
+
+        et_perc_from.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                //To check if string is not empty
+                //DO: Set valid flag to true for later calculation
+                //ELSE: Display "invalid input" onto the screen
+                if (et_perc_from.text.toString().isEmpty()|| et_perc_from.text.toString() == "." || et_perc_from.text.toString() == "-") {
+                    validFrom = false
+                    tv_perc_result.text = "0.0% increase/decrease"
+                    tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.underWeight))
+                } else {
+                    validFrom = true
+                    if(getPercFrom() == 0.0){
+                        tv_perc_result.text = getString(R.string.sl_invalid_perc)
+                        validFrom = false
+                    }
+                }
+            }
+            //If validFrom and validTo flags are BOTH true, start calculating
+            //DO: call calculate()
+            override fun afterTextChanged(editable: Editable) {
+                if (validFrom && validTo) {
+                    if(getPercFrom() <= getPercTo()){
+                        tv_perc_result.text = String.format("%.1f", calculateIncrease(getPercFrom(),getPercTo())) +"% increase"
+                        tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.normal))
+                    }
+                    else{
+                        tv_perc_result.text = String.format("%.1f", calculateDecrease(getPercFrom(),getPercTo())) +"% decrease"
+                        tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.obese))
+                    }
+                }
+            }
+        })
+
+
+        et_perc_to.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                //To check if string is not empty
+                //DO: Set valid flag to true for later calculation
+                //ELSE: Display "invalid input" onto the screen
+                if (et_perc_to.text.toString().isEmpty()|| et_perc_to.text.toString() == "."|| et_perc_to.text.toString() == "-") {
+                    validTo = false
+                    tv_perc_result.text = "0.0% increase/decrease"
+                    tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.underWeight))
+                } else {
+                    validTo = true
+                    //DESC: to show invalid string on result when et_perc_from is 0
+                    if(!et_perc_from.text.toString().isEmpty()){
+                        if(getPercFrom() == 0.0){
+                            tv_perc_result.text = getString(R.string.sl_invalid_perc)
+                            validFrom = false
+                        }
+                    }
+                }
+            }
+            //If validFrom and validTo flags are BOTH true, start calculating
+            //DO: call calculate()
+            override fun afterTextChanged(editable: Editable) {
+                if (validFrom && validTo) {
+                    if(getPercFrom() <= getPercTo()){
+                        tv_perc_result.text = String.format("%.1f", calculateIncrease(getPercFrom(),getPercTo())) +"% increase"
+                        tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.normal))
+                    }
+                    else{
+                        tv_perc_result.text = String.format("%.1f", calculateDecrease(getPercFrom(),getPercTo())) +"% decrease"
+                        tv_perc_result.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.obese))
+                    }
+                }
+            }
+        })
     }
 
     private fun calculateIncrease(oriNum: Double, newNum: Double): Double {
