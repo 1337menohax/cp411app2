@@ -1,4 +1,4 @@
-package com.example.v2.cp411todocalculator
+package com.example.v2.cp411app2
 
 import android.content.Intent
 import android.support.design.widget.TabLayout
@@ -17,7 +17,7 @@ import android.view.View
 
 /**Multi-Calculator
  * DESC: This is a multi calculator designed for CP411 Android development APP 1 project.
- * INCLUDE: Tip/Tax, Percentage Different, Fraction, BMI, calculators
+ * INCLUDE: Tip/Tax, Percentage Difference, Fraction, BMI calculators
  * CREATED BY: Ivan Vu
  * CREATED DATE:05NOV2018
  * LAST UPDATE: 08NOV2018*/
@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
      * may be best to switch to a
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
-    //TODO: STUDY Codelab MDC:101,102,111 name of widget and what they do on quiz
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     /**
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun getCount(): Int {
             // Show 4 total pages.
-            return 4
+            return 1
         }
     }
 }

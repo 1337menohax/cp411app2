@@ -1,4 +1,4 @@
-package com.example.v2.cp411todocalculator;
+package com.example.v2.cp411app2;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

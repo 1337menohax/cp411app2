@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">//TODO: Calculator</string>
+    <string name="app_name">App2BMI</string>
     <string name="tab_text_1">TIP/TAX</string>
     <string name="tab_text_2">% DIFF</string>
     <string name="tab_text_3">Fraction</string>

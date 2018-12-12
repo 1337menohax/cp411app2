@@ -1,0 +1,625 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ app/build.gradle	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -1,5 +1,6 @@
+ apply plugin: 'com.android.application'
+-
++apply plugin: 'kotlin-android'
++apply plugin: 'kotlin-android-extensions'
+ android {
+     compileSdkVersion 28
+     defaultConfig {
+@@ -26,4 +27,5 @@
+     testImplementation 'junit:junit:4.12'
+     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
++    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+ }
+Index: app/src/main/java/com/example/v2/cp411todocalculator/Cal1.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/v2/cp411todocalculator/Cal1.kt	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
++++ app/src/main/java/com/example/v2/cp411todocalculator/Cal1.kt	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -0,0 +1,40 @@
++package com.example.v2.cp411todocalculator
++
++import android.support.v4.app.Fragment
++import android.os.Bundle
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import kotlinx.android.synthetic.main.cal1.*
++import kotlinx.android.synthetic.main.cal1.view.*
++
++class Cal1 : Fragment() {
++    internal var userBill = 0.0
++    internal var userTip = 0.0
++    internal var userTax = 0.0
++    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
++                              savedInstanceState: Bundle?): View? {
++        val rootView = inflater.inflate(R.layout.cal1, container, false)
++
++
++        rootView.btCalculate?.setOnClickListener {
++            if (!etBillAmount.text.toString().isEmpty()) {
++                userBill = java.lang.Double.parseDouble(etBillAmount.text.toString())
++            }
++            if (!etTip.text.toString().isEmpty()) {
++                userTip = java.lang.Double.parseDouble(etTip.text.toString())
++            }
++            if (!etSaleTax.text.toString().isEmpty()) {
++                userTax = java.lang.Double.parseDouble(etSaleTax.text.toString())
++            }
++            tvTotal.text = "$" + String.format("%.2f", calculate(userBill, userTip, userTax))
++        }
++        return rootView
++
++    }
++
++
++    private fun calculate(cost: Double, tip: Double, tax: Double): Double {
++        return cost + cost * (tip / 100) + cost * (tax / 100)
++    }
++}
+Index: app/src/main/java/com/example/v2/cp411todocalculator/Cal2.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/v2/cp411todocalculator/Cal2.kt	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
++++ app/src/main/java/com/example/v2/cp411todocalculator/Cal2.kt	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -0,0 +1,15 @@
++package com.example.v2.cp411todocalculator
++
++
++import android.support.v4.app.Fragment
++import android.os.Bundle
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++
++class Cal2 : Fragment() {
++    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
++                              savedInstanceState: Bundle?): View? {
++        return inflater.inflate(R.layout.cal2, container, false)
++    }
++}
+Index: app/src/main/java/com/example/v2/cp411todocalculator/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/v2/cp411todocalculator/MainActivity.kt	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
++++ app/src/main/java/com/example/v2/cp411todocalculator/MainActivity.kt	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -0,0 +1,101 @@
++package com.example.v2.cp411todocalculator
++
++import android.support.design.widget.TabLayout
++import android.support.design.widget.FloatingActionButton
++import android.support.design.widget.Snackbar
++import android.support.v7.app.AppCompatActivity
++import android.support.v7.widget.Toolbar
++
++import android.support.v4.app.Fragment
++import android.support.v4.app.FragmentManager
++import android.support.v4.app.FragmentPagerAdapter
++import android.support.v4.view.ViewPager
++import android.os.Bundle
++
++import android.view.Menu
++import android.view.MenuItem
++import android.view.View
++
++
++class MainActivity : AppCompatActivity() {
++    /**
++     * The [android.support.v4.view.PagerAdapter] that will provide
++     * fragments for each of the sections. We use a
++     * [FragmentPagerAdapter] derivative, which will keep every
++     * loaded fragment in memory. If this becomes too memory intensive, it
++     * may be best to switch to a
++     * [android.support.v4.app.FragmentStatePagerAdapter].
++     */
++    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
++
++    /**
++     * The [ViewPager] that will host the section contents.
++     */
++    private var mViewPager: ViewPager? = null
++
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        setContentView(R.layout.activity_main)
++
++        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
++        setSupportActionBar(toolbar)
++        // Create the adapter that will return a fragment for each of the three
++        // primary sections of the activity.
++        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
++
++        // Set up the ViewPager with the sections adapter.
++        mViewPager = findViewById<View>(R.id.container) as ViewPager
++        mViewPager!!.adapter = mSectionsPagerAdapter
++
++        val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
++
++        mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
++        tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
++
++    }
++
++
++    override fun onCreateOptionsMenu(menu: Menu): Boolean {
++        // Inflate the menu; this adds items to the action bar if it is present.
++        menuInflater.inflate(R.menu.menu_main, menu)
++        return true
++    }
++
++    override fun onOptionsItemSelected(item: MenuItem): Boolean {
++        // Handle action bar item clicks here. The action bar will
++        // automatically handle clicks on the Home/Up button, so long
++        // as you specify a parent activity in AndroidManifest.xml.
++        val id = item.itemId
++
++
++        return if (id == R.id.action_settings) {
++            true
++        } else super.onOptionsItemSelected(item)
++
++    }
++
++
++    /**
++     * A [FragmentPagerAdapter] that returns a fragment corresponding to
++     * one of the sections/tabs/pages.
++     */
++    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
++
++        override fun getItem(position: Int): Fragment? {
++            when (position) {
++                0 -> {
++                    return Cal1()
++                }
++                1 -> {
++                    return Cal2()
++                }
++                else -> return null
++            }
++        }
++
++        override fun getCount(): Int {
++            // Show 3 total pages.
++            return 2
++        }
++    }
++}
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ app/src/main/res/layout/activity_main.xml	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -60,12 +60,4 @@
+         android:layout_height="match_parent"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+ 
+-    <android.support.design.widget.FloatingActionButton
+-        android:id="@+id/fab"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_gravity="end|bottom"
+-        android:layout_margin="@dimen/fab_margin"
+-        app:srcCompat="@android:drawable/ic_dialog_email" />
+-
+ </android.support.design.widget.CoordinatorLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/cal1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/cal1.xml	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
++++ app/src/main/res/layout/cal1.xml	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -0,0 +1,142 @@
++<?xml version="1.0" encoding="utf-8"?>
++<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/constraintLayout"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <TextView
++        android:id="@+id/section_label"
++        android:layout_width="142dp"
++        android:layout_height="24dp"
++        android:layout_marginLeft="16dp"
++        android:layout_marginTop="24dp"
++        android:text="@string/s_sec1_label"
++        app:layout_constraintLeft_toLeftOf="parent"
++        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
++        tools:layout_constraintLeft_creator="1"
++        tools:layout_constraintTop_creator="1" />
++
++    <Button
++        android:id="@+id/btCalculate"
++        android:layout_width="189dp"
++        android:layout_height="48dp"
++        android:layout_marginStart="8dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="8dp"
++        android:text="Calculate"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.877"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/textView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="36dp"
++        android:layout_marginTop="88dp"
++        android:text="@string/s_bill_amount"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <EditText
++        android:id="@+id/etBillAmount"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:layout_marginTop="68dp"
++        android:layout_marginEnd="16dp"
++        android:ems="10"
++        android:inputType="numberDecimal"
++        android:maxLength="15"
++        android:text="@string/s_defaultAmount"
++        android:textAlignment="viewEnd"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="1.0"
++        app:layout_constraintStart_toEndOf="@+id/textView"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <EditText
++        android:id="@+id/etTip"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:layout_marginTop="12dp"
++        android:layout_marginEnd="16dp"
++        android:ems="10"
++        android:hint="15"
++        android:inputType="numberDecimal"
++        android:maxLength="15"
++        android:text="@string/s_defaultTip"
++        android:textAlignment="viewEnd"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="1.0"
++        app:layout_constraintStart_toEndOf="@+id/textView2"
++        app:layout_constraintTop_toBottomOf="@+id/etBillAmount" />
++
++    <TextView
++        android:id="@+id/textView2"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="36dp"
++        android:layout_marginTop="148dp"
++        android:text="@string/s_tip"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/textView3"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="36dp"
++        android:layout_marginTop="208dp"
++        android:text="@string/s_tax"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <EditText
++        android:id="@+id/etSaleTax"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:layout_marginTop="12dp"
++        android:layout_marginEnd="8dp"
++        android:ems="10"
++        android:hint="7.25"
++        android:inputType="numberDecimal"
++        android:maxLength="15"
++        android:text="@string/s_defaultSaleTax"
++        android:textAlignment="viewEnd"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.84"
++        app:layout_constraintStart_toEndOf="@+id/textView3"
++        app:layout_constraintTop_toBottomOf="@+id/etTip" />
++
++    <TextView
++        android:id="@+id/textView4"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="36dp"
++        android:layout_marginTop="256dp"
++        android:text="@string/s_total"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/tvTotal"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="8dp"
++        android:text="@string/s_default_total"
++        android:textAlignment="center"
++        android:textSize="24sp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.968"
++        app:layout_constraintStart_toEndOf="@+id/textView4"
++        app:layout_constraintTop_toBottomOf="@+id/etSaleTax" />
++
++</android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_main.xml
+===================================================================
+--- app/src/main/res/layout/fragment_main.xml	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ app/src/main/res/layout/cal2.xml	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -4,8 +4,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/constraintLayout"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".MainActivity$PlaceholderFragment">
++    android:layout_height="match_parent">
+ 
+     <TextView
+         android:id="@+id/section_label"
+@@ -20,4 +19,15 @@
+         tools:layout_constraintLeft_creator="1"
+         tools:layout_constraintTop_creator="1" />
+ 
++    <Button
++        android:id="@+id/button2"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:layout_marginEnd="8dp"
++        android:text="Button"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:layout_editor_absoluteY="273dp" />
++
+ </android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ app/src/main/res/values/colors.xml	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <color name="colorPrimary">#008577</color>
+-    <color name="colorPrimaryDark">#00574B</color>
++    <color name="colorPrimaryDark">#00574b</color>
+     <color name="colorAccent">#dbdbdb</color>
+ </resources>
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ app/src/main/res/values/strings.xml	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -1,8 +1,17 @@
+ <resources>
+-    <string name="app_name">cp411todocalculator</string>
++    <string name="app_name">TODO:calculator</string>
+     <string name="tab_text_1">Tab 1</string>
+     <string name="tab_text_2">Tab 2</string>
+     <string name="tab_text_3">Tab 3</string>
+     <string name="action_settings">Settings</string>
+-    <string name="section_format">Hello World from section: %1$d</string>
++    <string name="s_sec1_label">Tip Calculator</string>
++    <string name="s_bill_amount">Bill Amount</string>
++    <string name="s_tip">Tip %</string>
++    <string name="s_tax">Sale Tax %</string>
++    <string name="s_total">Total</string>
++    <string name="s_calculate">Calculate</string>
++    <string name="s_default_total">$0.00</string>
++    <string name="s_defaultSaleTax">7.25</string>
++    <string name="s_defaultAmount">0.0</string>
++    <string name="s_defaultTip">15</string>
+ </resources>
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ build.gradle	(revision 78eec28cff2e24593748a90d5a67aa33c9562c1f)
+@@ -1,13 +1,14 @@
+ // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ 
+ buildscript {
+-    
++    ext.kotlin_version = '1.2.71'
+     repositories {
+         google()
+         jcenter()
+     }
+     dependencies {
+         classpath 'com.android.tools.build:gradle:3.2.1'
++        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+         
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+Index: app/src/main/java/com/example/v2/cp411todocalculator/MainActivity.java
+===================================================================
+--- app/src/main/java/com/example/v2/cp411todocalculator/MainActivity.java	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
++++ app/src/main/java/com/example/v2/cp411todocalculator/MainActivity.java	(revision 8313c52d2a168d7fc0f39e1f190f9c1540a9fb7c)
+@@ -1,151 +0,0 @@
+-package com.example.v2.cp411todocalculator;
+-
+-import android.support.design.widget.TabLayout;
+-import android.support.design.widget.FloatingActionButton;
+-import android.support.design.widget.Snackbar;
+-import android.support.v7.app.AppCompatActivity;
+-import android.support.v7.widget.Toolbar;
+-
+-import android.support.v4.app.Fragment;
+-import android.support.v4.app.FragmentManager;
+-import android.support.v4.app.FragmentPagerAdapter;
+-import android.support.v4.view.ViewPager;
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-import android.view.View;
+-import android.view.ViewGroup;
+-
+-import android.widget.TextView;
+-
+-public class MainActivity extends AppCompatActivity {
+-
+-    /**
+-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+-     * fragments for each of the sections. We use a
+-     * {@link FragmentPagerAdapter} derivative, which will keep every
+-     * loaded fragment in memory. If this becomes too memory intensive, it
+-     * may be best to switch to a
+-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+-     */
+-    private SectionsPagerAdapter mSectionsPagerAdapter;
+-
+-    /**
+-     * The {@link ViewPager} that will host the section contents.
+-     */
+-    private ViewPager mViewPager;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_main);
+-
+-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+-        setSupportActionBar(toolbar);
+-        // Create the adapter that will return a fragment for each of the three
+-        // primary sections of the activity.
+-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+-
+-        // Set up the ViewPager with the sections adapter.
+-        mViewPager = (ViewPager) findViewById(R.id.container);
+-        mViewPager.setAdapter(mSectionsPagerAdapter);
+-
+-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+-
+-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+-
+-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+-        fab.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+-                        .setAction("Action", null).show();
+-            }
+-        });
+-
+-    }
+-
+-
+-    @Override
+-    public boolean onCreateOptionsMenu(Menu menu) {
+-        // Inflate the menu; this adds items to the action bar if it is present.
+-        getMenuInflater().inflate(R.menu.menu_main, menu);
+-        return true;
+-    }
+-
+-    @Override
+-    public boolean onOptionsItemSelected(MenuItem item) {
+-        // Handle action bar item clicks here. The action bar will
+-        // automatically handle clicks on the Home/Up button, so long
+-        // as you specify a parent activity in AndroidManifest.xml.
+-        int id = item.getItemId();
+-
+-        //noinspection SimplifiableIfStatement
+-        if (id == R.id.action_settings) {
+-            return true;
+-        }
+-
+-        return super.onOptionsItemSelected(item);
+-    }
+-
+-    /**
+-     * A placeholder fragment containing a simple view.
+-     */
+-    public static class PlaceholderFragment extends Fragment {
+-        /**
+-         * The fragment argument representing the section number for this
+-         * fragment.
+-         */
+-        private static final String ARG_SECTION_NUMBER = "section_number";
+-
+-        public PlaceholderFragment() {
+-        }
+-
+-        /**
+-         * Returns a new instance of this fragment for the given section
+-         * number.
+-         */
+-        public static PlaceholderFragment newInstance(int sectionNumber) {
+-            PlaceholderFragment fragment = new PlaceholderFragment();
+-            Bundle args = new Bundle();
+-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+-            fragment.setArguments(args);
+-            return fragment;
+-        }
+-
+-        @Override
+-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                                 Bundle savedInstanceState) {
+-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+-            return rootView;
+-        }
+-    }
+-
+-    /**
+-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+-     * one of the sections/tabs/pages.
+-     */
+-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+-
+-        public SectionsPagerAdapter(FragmentManager fm) {
+-            super(fm);
+-        }
+-
+-        @Override
+-        public Fragment getItem(int position) {
+-            // getItem is called to instantiate the fragment for the given page.
+-            // Return a PlaceholderFragment (defined as a static inner class below).
+-            return PlaceholderFragment.newInstance(position + 1);
+-        }
+-
+-        @Override
+-        public int getCount() {
+-            // Show 3 total pages.
+-            return 3;
+-        }
+-    }
+-}
