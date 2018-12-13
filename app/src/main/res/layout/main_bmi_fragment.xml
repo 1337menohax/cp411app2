@@ -30,7 +30,7 @@
 
         <Button
             android:id="@+id/bt_computeBmi"
-            android:layout_width="189dp"
+            android:layout_width="114dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -150,7 +150,7 @@
             android:id="@+id/tv_yourBmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="60dp"
             android:gravity="left"
             android:text="@{Double.toString(mainbmiviewmodel.resultBMI)}"
             android:textDirection="locale"
@@ -160,18 +160,17 @@
 
         <TextView
             android:id="@+id/tv_statusBMI"
-            android:layout_width="110dp"
+            android:layout_width="112dp"
             android:layout_height="33dp"
-            android:layout_marginStart="144dp"
-            android:layout_marginTop="240dp"
+            android:layout_marginStart="148dp"
             android:text=""
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
             android:visibility="visible"
             app:bmiStatus="@{mainbmiviewmodel.statusBMI}"
             app:hideIfZero="@{mainbmiviewmodel.resultBMI}"
-            app:layout_constraintStart_toEndOf="@+id/tv_height"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_yourBmi"
+            app:layout_constraintStart_toEndOf="@+id/tv_height" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
