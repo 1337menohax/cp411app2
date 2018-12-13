@@ -1,3 +1,4 @@
+/*
 package com.example.v2.cp411app2
 import android.support.v4.app.Fragment
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import java.lang.Integer.parseInt
 
+*/
 /**Fraction Calculator
  * DESC: Calculate fractions
  * INPUT:   2 Numerators
@@ -20,7 +22,8 @@ import java.lang.Integer.parseInt
  * OUTPUT:  Fraction in reduced form
  * CREATED BY: Ivan Vu
  * CREATED DATE:05NOV2018
- * LAST UPDATE: 08NOV2018*/
+ * LAST UPDATE: 08NOV2018*//*
+
 
 class Cal3 : Fragment(){
     var numerator : Int = 0
@@ -53,7 +56,9 @@ class Cal3 : Fragment(){
             et_denom1.setText("")
             et_denom2.setText("")
         }
-        /******START OF NUMERATOR 1***/
+        */
+/******START OF NUMERATOR 1***//*
+
         et_nom1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -65,8 +70,12 @@ class Cal3 : Fragment(){
                 }
             }
         })
-        /******END OF NUMERATOR 1***/
-        /******START OF NUMERATOR 2***/
+        */
+/******END OF NUMERATOR 1***//*
+
+        */
+/******START OF NUMERATOR 2***//*
+
         et_nom2.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -78,8 +87,12 @@ class Cal3 : Fragment(){
                 }
             }
         })
-        /******END OF NUMERATOR 2***/
-        /******START OF DENOMINATOR 1***/
+        */
+/******END OF NUMERATOR 2***//*
+
+        */
+/******START OF DENOMINATOR 1***//*
+
         et_denom1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -91,8 +104,12 @@ class Cal3 : Fragment(){
                 }
             }
         })
-        /******END OF DENOMINATOR 1***/
-        /******START OF DENOMINATOR 2***/
+        */
+/******END OF DENOMINATOR 1***//*
+
+        */
+/******START OF DENOMINATOR 2***//*
+
         et_denom2.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -106,7 +123,9 @@ class Cal3 : Fragment(){
                 }
             }
         })
-        /******END OF DENOMINATOR 2***/
+        */
+/******END OF DENOMINATOR 2***//*
+
     }
     private fun getNum1():Int{
         //return et_nom1.text.toString().toInt()
@@ -124,13 +143,15 @@ class Cal3 : Fragment(){
     private fun getSpinner():String{
         return  spinner_sign.selectedItem.toString()
     }
-    /**FUNC: setResultText
+    */
+/**FUNC: setResultText
      * DESC: Calculate the greatest common divider and show the result
      * INPUT:   Numerator
      *          Denominator
      *
      * OUT:     Result in fraction form
-     * TODO: Clean up variable names for easy read*/
+     * TODO: Clean up variable names for easy read*//*
+
     private fun setResultText( pNum: Int, pDenom: Int){
 
         //Algorithm to find GCD start
@@ -173,10 +194,12 @@ class Cal3 : Fragment(){
         numerator = num1*denom2
         denominator = denom1*num2
     }
-    /**FUNC: checkAllNum
+    */
+/**FUNC: checkAllNum
      * DESC: Making sure all editText are good to for calculation
      * INPUT:
-     * OUT:     True if all fills are good, otherwise False*/
+     * OUT:     True if all fills are good, otherwise False*//*
+
     fun checkAllNum():Boolean{
         var validNum1= false
         var validNum2= false
@@ -213,9 +236,11 @@ class Cal3 : Fragment(){
         }
         return validNum1 && validNum2 && validDeno1 && validDeno2
     }
-    /**FUNC: checkSpinner
+    */
+/**FUNC: checkSpinner
      * DESC: check which signs on the spinner
-     * DO: call calculate function based on signs that is pick*/
+     * DO: call calculate function based on signs that is pick*//*
+
     private fun checkSpinner(){
         if(getSpinner() == "+"){
             addFrac(getNum1(),getNum2(),getDeno1(),getDeno2())
@@ -238,3 +263,4 @@ class Cal3 : Fragment(){
     }
 
 }
+*/

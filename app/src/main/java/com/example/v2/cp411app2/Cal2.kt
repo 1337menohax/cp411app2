@@ -1,3 +1,4 @@
+/*
 package com.example.v2.cp411app2
 import android.support.v4.app.Fragment
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cal2.*
 
+*/
 /**Percentage Different Calculator
  * DESC: Calculate the percentage between original number and new number
  * INPUT:   Original number
@@ -19,7 +21,8 @@ import kotlinx.android.synthetic.main.cal2.*
  * CREATED BY: Ivan Vu
  * CREATED DATE:05NOV2018
  * LAST UPDATE: 08NOV2018
- * TODO: Put checking IF/ELSE into functions for easy read*/
+ * TODO: Put checking IF/ELSE into functions for easy read*//*
+
 
 class Cal2 : Fragment() {
 
@@ -123,3 +126,4 @@ class Cal2 : Fragment() {
     }
 
 }
+*/

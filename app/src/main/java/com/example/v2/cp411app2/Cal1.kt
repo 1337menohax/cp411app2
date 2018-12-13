@@ -1,3 +1,4 @@
+/*
 package com.example.v2.cp411app2
 
 import android.support.v4.app.Fragment
@@ -10,13 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.cal1.*
 
+*/
 /**Tip/Tax Calculator
  * DESC: Calculate total bill amount
  * INPUT:Bill Amount, Tip, Tax
  * OUTPUT: Total price
  * CREATED BY: Ivan Vu
  * CREATED DATE:05NOV2018
- * LAST UPDATE: 08NOV2018*/
+ * LAST UPDATE: 08NOV2018*//*
+
 class Cal1 : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,9 @@ class Cal1 : Fragment() {
             etTip.setText("15")
             etSaleTax.setText("7.25")
         }
-        /**Listen to editText of BILL AMOUNT and update flag*/
+        */
+/**Listen to editText of BILL AMOUNT and update flag*//*
+
         etBillAmount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -58,7 +63,9 @@ class Cal1 : Fragment() {
                 }
             }
         })
-        /**Listen to editText of TIP and update flag*/
+        */
+/**Listen to editText of TIP and update flag*//*
+
         etTip.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -79,7 +86,9 @@ class Cal1 : Fragment() {
             }
         })
 
-        /**Listen to editText of TAX and update flag*/
+        */
+/**Listen to editText of TAX and update flag*//*
+
         etSaleTax.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -98,8 +107,10 @@ class Cal1 : Fragment() {
             }
         })
     }
-    /**FUNC: get*
-     * RETURN: Double decimal from editText*/
+    */
+/**FUNC: get*
+     * RETURN: Double decimal from editText*//*
+
     private fun getBillAmount():Double{
         return java.lang.Double.parseDouble(etBillAmount.text.toString())
     }
@@ -109,12 +120,15 @@ class Cal1 : Fragment() {
     private fun getTax():Double{
         return java.lang.Double.parseDouble(etSaleTax.text.toString())
     }
-    /**FUNC: calculate
+    */
+/**FUNC: calculate
      * INPUT:   Double cost
      *          Double tip
      *          Double tax
-     * RETURN:  Double total cost*/
+     * RETURN:  Double total cost*//*
+
     private fun calculate(cost: Double, tip: Double, tax: Double): Double {
         return cost + cost * (tip / 100) + cost * (tax / 100)
     }
 }
+*/

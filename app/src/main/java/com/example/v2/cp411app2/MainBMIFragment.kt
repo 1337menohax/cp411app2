@@ -1,4 +1,3 @@
-/*
 package com.example.v2.cp411app2
 
 import android.arch.lifecycle.ViewModelProviders
@@ -16,7 +15,6 @@ import com.example.v2.cp411app2.databinding.MainBmiFragmentBinding
 import kotlinx.android.synthetic.main.cal4.*
 import java.lang.Math.pow
 
-*/
 /**BMI Calculator
  * DESC: Calculate Body Mass Index(BMI) to see if youre normal
  * INPUT:   Feet
@@ -29,8 +27,7 @@ import java.lang.Math.pow
  * CREATED BY: Ivan Vu
  * LAST UPDATE: 12DEC2018
  * LAST UPDATED BY: Ivan Vu
- * TODO: fix IF/ELSE into function for easy read*//*
-
+ * TODO: fix IF/ELSE into function for easy read*/
 class MainBMIFragment : Fragment() {
 
     //Source: https://codelabs.developers.google.com/codelabs/android-databinding/#1
@@ -38,12 +35,6 @@ class MainBMIFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(MainBmiViewModel::class.java)
     }
-//
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                              savedInstanceState: Bundle?): View? {
-//        return inflater.inflate(R.layout.cal4, container, false)
-//    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -206,4 +197,3 @@ class MainBMIFragment : Fragment() {
     }
 
 }
-*/
