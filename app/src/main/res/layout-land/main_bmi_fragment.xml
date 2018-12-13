@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
+    <!--<data>
         <variable
             name="mainbmiviewmodel"
             type="com.example.v2.cp411app2.MainBmiViewModel" />
@@ -172,5 +172,5 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_yourBmi"
             app:layout_constraintStart_toEndOf="@+id/tv_height" />
 
-    </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>-->
 </layout>

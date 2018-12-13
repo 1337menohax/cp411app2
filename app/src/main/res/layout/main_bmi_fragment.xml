@@ -37,7 +37,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/sl_reset"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.968"
+            app:layout_constraintHorizontal_bias="0.944"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,6 +171,15 @@
             app:hideIfZero="@{mainbmiviewmodel.resultBMI}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_yourBmi"
             app:layout_constraintStart_toEndOf="@+id/tv_height" />
+
+        <Spinner
+            android:id="@+id/spinner_profile"
+            android:layout_width="198dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

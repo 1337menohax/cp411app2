@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.v2.cp411app2.databinding.MainBmiFragmentBinding
+import kotlinx.android.synthetic.main.main_bmi_fragment.*
 
 
 /**BMI Calculator
@@ -38,10 +41,23 @@ class MainBMIFragment : Fragment() {
         binding.mainbmiviewmodel = viewModel
         return binding.root
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val listSign = arrayOf("+", "-", "*","/")
+        spinner_profile.adapter = ArrayAdapter(activity, R.layout.spinner_item, listSign)
+        spinner_profile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //To change body of created functions use File | Settings | File Templates.
+            }
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                //TODO do stuff when a profile is selected
+            }
+        }
+    }
     companion object {
         fun newInstance() = MainBMIFragment()
     }
+    
 }
 
 
