@@ -24,7 +24,7 @@ class About : AppCompatActivity() {
 
         /*About page content*/
         val versionElement = Element()
-        versionElement.title = "Version 1.0"
+        versionElement.title = "Version 0.2"
         val aboutPage = AboutPage(this)
                 .isRTL(false)
                 .setImage(R.drawable.about_img)
@@ -32,9 +32,9 @@ class About : AppCompatActivity() {
                 .addGroup("Found bugs? MSG ME HERE:")
                 .addEmail("vivu493@gmail.com")
                 .addWebsite("https://github.com/1337menohax")
-                .addGitHub("1337menohax/cp411todocalculator")
+                .addGitHub("1337menohax/cp411app2")
                 //.addInstagram("")
-                .setDescription("For  CP411 Android Development App1 Project.")
+                .setDescription("For  CP411 Android Development App2 Project.")
                 .create()
         setContentView(aboutPage)
     }

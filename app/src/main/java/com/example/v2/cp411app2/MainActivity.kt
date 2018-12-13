@@ -12,18 +12,26 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 
 
-/**BMI
- * DESC: This is a multi calculator designed for CP411 Android development APP 1 project.
+/**BMI Calculator
+ * DESC: Calculate Body Mass Index(BMI) to see if youre normal
+ * INPUT:   Feet
+ *          Inches
+ *          Pound
+ *
+ * OUTPUT:  BMI and BMI status(normal,healthy,underweight, or obese)
+ *
  * CREATED DATE:05NOV2018
  * CREATED BY: Ivan Vu
  * LAST UPDATE: 12DEC2018
- * LAST UPDATED BY: Ivan Vu*/
+ * LAST UPDATED BY: Ivan Vu
+ * 0.2: added data binding
+ * */
 
 class MainActivity : AppCompatActivity() {
 
-    var isFragmentDisplayed = false
+    var isFragmentDisplayed = true
     private val STATE_FRAGMENT = "state_of_fragment"
-
+    //TODO: BUG: layer being recreated when changing orientation
     public override fun onSaveInstanceState(savedInstanceState: Bundle) {
         // Save the state of the fragment (true=open, false=closed).
         savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed)

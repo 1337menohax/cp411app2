@@ -22,7 +22,7 @@
     <string name="sl_to_input">To</string>
     <string name="sl_answer">Answer</string>
     <string name="sl_default_perc">0.0% increase/decrease</string>
-    <string name="sl_invalid_perc">\"% from\" cannot be 0</string>
+    <string name="sl_invalid_perc">"Perc" from cannot be 0</string>
 
     <string name="sl_sec3_label">Fraction Calculator</string>
 
@@ -36,5 +36,10 @@
     <string name="sl_compute_BMI">Compute BMI</string>
     <string name="sl_yourBmi">Your BMI</string>
     <string name="sl_invalid_feet">0</string>
+    <string name="sl_underweight">Underweight</string>
+    <string name="sl_normal">Normal</string>
+    <string name="sl_overweight">Overweight</string>
+    <string name="sl_obese">Obese</string>
+
 
 </resources>

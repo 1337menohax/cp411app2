@@ -4,16 +4,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.support.v4.app.Fragment
 import android.os.Bundle
-import android.support.annotation.Nullable
-import android.support.v4.content.ContextCompat
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.v2.cp411app2.databinding.MainBmiFragmentBinding
-import kotlinx.android.synthetic.main.cal4.*
-import java.lang.Math.pow
+
 
 /**BMI Calculator
  * DESC: Calculate Body Mass Index(BMI) to see if youre normal
@@ -35,6 +30,7 @@ class MainBMIFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(MainBmiViewModel::class.java)
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -42,10 +38,14 @@ class MainBMIFragment : Fragment() {
         binding.mainbmiviewmodel = viewModel
         return binding.root
     }
+
     companion object {
         fun newInstance() = MainBMIFragment()
     }
-    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+}
+
+
+/*    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         var validFeet = false
         var validInch = false
         var validWeight = false
@@ -61,7 +61,7 @@ class MainBMIFragment : Fragment() {
 
         }
 
-        et_feet.addTextChangedListener(object : TextWatcher {
+         et_feet.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 //To check if string is not empty
@@ -196,4 +196,6 @@ class MainBMIFragment : Fragment() {
         return java.lang.Double.parseDouble(et_pound.text.toString())
     }
 
+    }
 }
+*/
