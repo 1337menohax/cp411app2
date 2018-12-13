@@ -43,7 +43,7 @@ class MainBMIFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val listSign = arrayOf("+", "-", "*","/")
+        val listSign = arrayOf("New Profile", "Ivan", "Sunny","Dom")
         spinner_profile.adapter = ArrayAdapter(activity, R.layout.spinner_item, listSign)
         spinner_profile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -57,7 +57,7 @@ class MainBMIFragment : Fragment() {
     companion object {
         fun newInstance() = MainBMIFragment()
     }
-    
+
 }
 
 
