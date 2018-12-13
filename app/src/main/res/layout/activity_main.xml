@@ -10,7 +10,7 @@
 
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:name="com.example.v2.cp411app2.MainBMI"
+        android:name="com.example.v2.cp411app2.MainBMIFragment"
         android:layout_width="0dp"
         android:layout_height="306dp"
         app:layout_constraintHorizontal_bias="0.0"

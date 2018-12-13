@@ -29,7 +29,7 @@ import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
 
-    var isFragmentDisplayed = true
+    var isFragmentDisplayed = false
     private val STATE_FRAGMENT = "state_of_fragment"
     //TODO: BUG: layer being recreated when changing orientation
     public override fun onSaveInstanceState(savedInstanceState: Bundle) {
@@ -44,8 +44,12 @@ class MainActivity : AppCompatActivity() {
             isFragmentDisplayed =
                     savedInstanceState.getBoolean(STATE_FRAGMENT)
         }
-        displayFragment()
+            if (!isFragmentDisplayed) {
+                displayFragment()
+            }
     }
+
+
 
     /**
      * FUNC: onCreateOptionsMenu, onOptionsItemSelected
@@ -104,10 +108,8 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.fragment_container,
                 mainFragment).addToBackStack(null).commit()
         // Update the Button text.
-        ////open_button.setText(R.string.close_button)
+        //open_button.setText(R.string.close_button)
         // Set boolean flag to indicate fragment is open.
         isFragmentDisplayed = true
     }
-
-
 }
