@@ -38,8 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         if (savedInstanceState != null) { //if bundle were saved successful
             isFragmentDisplayed =
                     savedInstanceState.getBoolean(STATE_FRAGMENT)
@@ -47,6 +49,8 @@ class MainActivity : AppCompatActivity() {
             if (!isFragmentDisplayed) {
                 displayFragment()
             }
+        //
+
     }
 
 

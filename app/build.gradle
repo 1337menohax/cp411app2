@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.v2.cp411todocalculator"
+        applicationId "com.example.v2.cp411app2"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1

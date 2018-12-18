@@ -7,6 +7,9 @@
         <variable
             name="mainbmiviewmodel"
             type="com.example.v2.cp411app2.MainBmiViewModel" />
+        <variable
+            name="databaseprofile"
+            type="com.example.v2.cp411app2.DatabaseProfile" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -29,7 +32,7 @@
             tools:layout_constraintTop_creator="1" />
 
         <Button
-            android:id="@+id/bt_computeBmi"
+            android:id="@+id/bt_save_profile"
             android:layout_width="114dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
@@ -148,9 +151,9 @@
 
         <TextView
             android:id="@+id/tv_yourBmi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_width="57dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="40dp"
             android:gravity="left"
             android:text="@{Double.toString(mainbmiviewmodel.resultBMI)}"
             android:textDirection="locale"
@@ -169,7 +172,7 @@
             android:visibility="visible"
             app:bmiStatus="@{mainbmiviewmodel.statusBMI}"
             app:hideIfZero="@{mainbmiviewmodel.resultBMI}"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_yourBmi"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_yourBmi"
             app:layout_constraintStart_toEndOf="@+id/tv_height" />
 
         <Spinner
@@ -188,6 +191,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.013" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="78dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="208dp"
+            android:layout_marginEnd="280dp"
+            android:text="Add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_save_profile" />
+
+        <Button
+            android:id="@+id/view_all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="168dp"
+            android:text="View all"
+            app:layout_constraintBottom_toBottomOf="@+id/add_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/add_button"
+            app:layout_constraintTop_toTopOf="@+id/add_button" />
+
+        <Button
+            android:id="@+id/deletebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Delete"
+            app:layout_constraintBottom_toBottomOf="@+id/add_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/add_button"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

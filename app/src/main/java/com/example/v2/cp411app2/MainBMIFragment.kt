@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.v2.cp411app2.databinding.MainBmiFragmentBinding
 import kotlinx.android.synthetic.main.main_bmi_fragment.*
-
 
 /**BMI Calculator
  * DESC: Calculate Body Mass Index(BMI) to see if youre normal
@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.main_bmi_fragment.*
  * TODO: fix IF/ELSE into function for easy read*/
 class MainBMIFragment : Fragment() {
 
+
     //Source: https://codelabs.developers.google.com/codelabs/android-databinding/#1
     //DESC: To obtain ViewModel from ViewModelProviders
     private val viewModel by lazy {
@@ -41,177 +42,99 @@ class MainBMIFragment : Fragment() {
         binding.mainbmiviewmodel = viewModel
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //Opening SQLite
+        val dbEntry: DatabaseProfile = DatabaseProfile(activity)
         super.onViewCreated(view, savedInstanceState)
-        val listSign = arrayOf("New Profile", "Ivan", "Sunny","Dom")
+        val listSign = arrayOf("Ivan", "Sunny", "Dom", "New Profile")
         spinner_profile.adapter = ArrayAdapter(activity, R.layout.spinner_item, listSign)
         spinner_profile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                //To change body of created functions use File | Settings | File Templates.
             }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 //TODO do stuff when a profile is selected
+                val isInserted = dbEntry.insertData(spinner_profile.selectedItem.toString(),
+                        et_feet.text.toString(),
+                        et_inches.text.toString(),
+                        et_pound.text.toString())
+
+                if (isInserted)
+                    Toast.makeText(activity, "Data Inserted", Toast.LENGTH_SHORT).show()
+                else {
+                    Toast.makeText(activity, "Data not Inserted", Toast.LENGTH_SHORT).show()
+                    val res = dbEntry.onSelected(spinner_profile.selectedItem.toString()) //Set cursor to the selected profile according to the spinner
+
+                    if (res.count == 0) { //if number of row is 0 then show no data found.
+                        Toast.makeText(activity, "No Data Found", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        res.moveToFirst()
+                        et_feet.setText( res.getString(res.getColumnIndex("FEET")))
+                        et_inches.setText( res.getString(res.getColumnIndex("INCHES")))
+                        et_pound.setText( res.getString(res.getColumnIndex("POUND")))
+                    }
+
+
+                }
             }
         }
+
+        add_button.setOnClickListener {
+            val isInserted = dbEntry.insertData(spinner_profile.selectedItem.toString(),
+                    et_feet.text.toString(),
+                    et_inches.text.toString(),
+                    et_pound.text.toString())
+            if (isInserted)
+                Toast.makeText(activity, "Data Inserted", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(activity, "Data not Inserted", Toast.LENGTH_SHORT).show()
+        }
+        view_all_button.setOnClickListener {
+            val res = dbEntry.allData
+            if (res.count == 0) {
+                // show message
+                Toast.makeText(activity, "No Data Found", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else{
+
+                val buffer = StringBuffer()
+                while (res.moveToNext()) {
+                    buffer.append("Name :" + res.getString(0) + "\n")
+                    buffer.append("Feet :" + res.getString(1) + "\n")
+                    buffer.append("Inches :" + res.getString(2) + "\n")
+                    buffer.append("Pound :" + res.getString(3) + "\n\n")
+                }
+
+                // Show all data
+                Toast.makeText(activity, buffer.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        bt_save_profile.setOnClickListener {
+            val isUpdate = dbEntry.updateData(spinner_profile.selectedItem.toString(),
+                    et_feet.text.toString(),
+                    et_inches.text.toString(),
+                    et_pound.text.toString())
+            if (isUpdate == true)
+                Toast.makeText(activity, "Data Update", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(activity, "Data not Updated", Toast.LENGTH_SHORT).show()
+        }
+
+
+        deletebutton.setOnClickListener {
+            val deletedRows = dbEntry.deleteData(spinner_profile.selectedItem.toString())
+            if(deletedRows!! > 0)
+                Toast.makeText(activity,"Data Deleted",Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(activity,"Data not Deleted",Toast.LENGTH_SHORT).show()
+        }
     }
+
     companion object {
         fun newInstance() = MainBMIFragment()
     }
 
 }
-
-
-/*    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
-        var validFeet = false
-        var validInch = false
-        var validWeight = false
-        bt_computeBmi?.setOnClickListener {
-            et_feet.setText("")
-            et_inches.setText("")
-            et_pound.setText("")
-            tv_statusBMI.text = ""
-            tv_yourBmi.text = "0.0"
-            validFeet= false
-            validInch = false
-            validWeight = false
-
-        }
-
-         et_feet.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //To check if string is not empty
-                //DO: Set valid flag to true for later calculation
-                //ELSE: Display "invalid input" onto the screen
-                if (et_feet.text.toString().isEmpty()|| et_feet.text.toString() == "." ) {
-                    validFeet = false
-                    tv_yourBmi.text = "0.0"
-                } else {
-                    validFeet = true
-                    if(getFeet() == 0.0){
-                        tv_yourBmi.text = getString(R.string.sl_invalid_feet)
-                        validFeet = false
-                    }
-                }
-            }
-            //If validFrom and validTo flags are BOTH true, start calculating
-            //DO: call calculate()
-            override fun afterTextChanged(editable: Editable) {
-                if (validFeet && validInch && validWeight){
-                    val resultBmi = calculate(getFeet(), getInch(), getWeight())
-                    tv_yourBmi.text = String.format("%.1f", resultBmi)
-                    if(resultBmi in 0.0..18.4){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.underWeight))
-                        tv_statusBMI.text = "Underweight"
-                    }
-                    else if (resultBmi in 18.5..24.9){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.normal))
-                        tv_statusBMI.text = "Normal"
-                    }
-                    else if (resultBmi in 25.0..29.9){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.overWeight))
-                        tv_statusBMI.text = "Overweight"
-                    }
-                    else if (resultBmi >= 30.0){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.obese))
-                        tv_statusBMI.text = "Obese"
-                    }
-                }
-            }
-        })
-
-        et_inches.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //To check if string is not empty
-                //DO: Set valid flag to true for later calculation
-                //ELSE: Display "invalid input" onto the screen
-                if (et_inches.text.toString().isEmpty()|| et_inches.text.toString() == "." ) {
-                    validInch = false
-                    tv_yourBmi.text = "0.0"
-                } else {
-                    validInch = true
-                }
-            }
-            //If validFrom and validTo flags are BOTH true, start calculating
-            //DO: call calculate()
-            override fun afterTextChanged(editable: Editable) {
-                if (validFeet && validInch && validWeight){
-                    val resultBmi = calculate(getFeet(), getInch(), getWeight())
-                    tv_yourBmi.text = String.format("%.1f", resultBmi)
-                    if(resultBmi in 0.0..18.4){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.underWeight))
-                        tv_statusBMI.text = "Underweight"
-                    }
-                    else if (resultBmi in 18.5..24.9){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.normal))
-                        tv_statusBMI.text = "Normal"
-                    }
-                    else if (resultBmi in 25.0..29.9){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.overWeight))
-                        tv_statusBMI.text = "Overweight"
-                    }
-                    else if (resultBmi >= 30.0){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.obese))
-                        tv_statusBMI.text = "Obese"
-                    }
-                }
-            }
-        })
-
-        et_pound.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //To check if string is not empty
-                //DO: Set valid flag to true for later calculation
-                //ELSE: Display "invalid input" onto the screen
-                if (et_pound.text.toString().isEmpty()|| et_pound.text.toString() == "." ) {
-                    validWeight = false
-                    tv_yourBmi.text = "0.0"
-                } else {
-                    validWeight = true
-                }
-            }
-            //If validFrom and validTo flags are BOTH true, start calculating
-            //DO: call calculate()
-            override fun afterTextChanged(editable: Editable) {
-                if (validFeet && validInch && validWeight){
-                    val resultBmi = calculate(getFeet(), getInch(), getWeight())
-                    tv_yourBmi.text = String.format("%.1f", resultBmi)
-                    if(resultBmi in 0.0..18.4){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.underWeight))
-                        tv_statusBMI.text = "Underweight"
-                    }
-                    else if (resultBmi in 18.5..24.9){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.normal))
-                        tv_statusBMI.text = "Normal"
-                    }
-                    else if (resultBmi in 25.0..29.9){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.overWeight))
-                        tv_statusBMI.text = "Overweight"
-                    }
-                    else if (resultBmi >= 30.0){
-                        tv_statusBMI.setTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.obese))
-                        tv_statusBMI.text = "Obese"
-                    }
-                }
-            }
-        })
-    }
-
-    private fun calculate(feet: Double, inch: Double, weight: Double): Double {
-        return(weight/ pow((feet * 12) + inch, 2.0))*703
-    }
-    private fun getFeet():Double{
-        return java.lang.Double.parseDouble(et_feet.text.toString())
-    }
-    private fun getInch():Double{
-        return java.lang.Double.parseDouble(et_inches.text.toString())
-    }
-    private fun getWeight():Double{
-        return java.lang.Double.parseDouble(et_pound.text.toString())
-    }
-
-    }
-}
-*/
