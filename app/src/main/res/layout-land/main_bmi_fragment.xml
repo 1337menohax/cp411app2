@@ -22,27 +22,27 @@
             android:id="@+id/bt_save_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
             android:text="@string/bt_save"
-            app:layout_constraintEnd_toEndOf="@+id/tv_label_yourbmi"
-            app:layout_constraintHorizontal_bias="0.363"
-            app:layout_constraintStart_toStartOf="@+id/tv_label_yourbmi"
-            app:layout_constraintTop_toBottomOf="@+id/tv_label_yourbmi" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_pound"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_profile"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/spinner_profile" />
 
         <TextView
             android:id="@+id/tv_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:text="@string/sl_height"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_feet"
-            app:layout_constraintEnd_toStartOf="@+id/et_feet" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="40dp"
             android:text="@string/sl_weight"
             app:layout_constraintEnd_toEndOf="@+id/tv_height"
             app:layout_constraintHorizontal_bias="1.0"
@@ -53,33 +53,33 @@
             android:id="@+id/tv_label_yourbmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="32dp"
             android:text="@string/sl_yourBmi"
             app:layout_constraintEnd_toEndOf="@+id/tv_weight"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.357"
             app:layout_constraintStart_toStartOf="@+id/tv_weight"
             app:layout_constraintTop_toBottomOf="@+id/tv_weight" />
 
         <EditText
+            android:imeOptions="flagNoExtractUi"
             android:id="@+id/et_feet"
             android:layout_width="86dp"
             android:layout_height="42dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginStart="44dp"
             android:ems="10"
             android:hint="Feet"
             android:inputType="numberDecimal"
             android:maxLength="2"
             android:onTextChanged="@{(s,start,before,count)->mainbmiviewmodel.onFeet(s)}"
             android:textAlignment="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_inches"
-            app:layout_constraintEnd_toStartOf="@+id/et_inches" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_height"
+            app:layout_constraintStart_toEndOf="@+id/tv_height" />
 
         <EditText
+            android:imeOptions="flagNoExtractUi"
             android:id="@+id/et_pound"
             android:layout_width="86dp"
             android:layout_height="42dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="lb"
             android:inputType="numberDecimal"
@@ -87,25 +87,23 @@
             android:onTextChanged="@{(s,start,before,count)->mainbmiviewmodel.onPound(s)}"
             android:textAlignment="center"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_weight"
-            app:layout_constraintEnd_toStartOf="@+id/et_inches"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toEndOf="@+id/et_feet"
             app:layout_constraintStart_toStartOf="@+id/et_feet" />
 
         <EditText
+            android:imeOptions="flagNoExtractUi"
             android:id="@+id/et_inches"
             android:layout_width="86dp"
             android:layout_height="42dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="44dp"
             android:ems="10"
             android:hint="Inches"
             android:inputType="numberDecimal"
             android:maxLength="2"
             android:onTextChanged="@{(s,start,before,count)->mainbmiviewmodel.onInches(s)}"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@+id/spinner_profile"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/spinner_profile"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_profile" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/et_feet"
+            app:layout_constraintStart_toEndOf="@+id/et_feet" />
 
         <TextView
             android:id="@+id/tv_yourBmi"
@@ -117,14 +115,12 @@
             android:textSize="24sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_yourbmi"
             app:layout_constraintEnd_toEndOf="@+id/et_pound"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/et_pound" />
 
         <TextView
             android:id="@+id/tv_statusBMI"
             android:layout_width="112dp"
             android:layout_height="33dp"
-            android:layout_marginStart="12dp"
             android:text=""
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
@@ -132,60 +128,66 @@
             app:bmiStatus="@{mainbmiviewmodel.statusBMI}"
             app:hideIfZero="@{mainbmiviewmodel.resultBMI}"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_yourBmi"
-            app:layout_constraintStart_toEndOf="@+id/tv_yourBmi" />
+            app:layout_constraintEnd_toEndOf="@+id/et_inches"
+            app:layout_constraintHorizontal_bias="0.653"
+            app:layout_constraintStart_toStartOf="@+id/et_inches" />
 
         <Spinner
             android:id="@+id/spinner_profile"
             android:layout_width="200dp"
             android:layout_height="39dp"
-            android:layout_marginTop="72dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="36dp"
+            app:layout_constraintBottom_toBottomOf="@+id/et_inches"
+            app:layout_constraintStart_toEndOf="@+id/et_inches"
+            app:layout_constraintTop_toTopOf="@+id/et_inches"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/add_button"
-            android:layout_width="78dp"
-            android:layout_height="44dp"
+            android:layout_width="35dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="12dp"
             android:text="Add"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/et_profilename"
             app:layout_constraintStart_toEndOf="@+id/et_profilename"
             app:layout_constraintTop_toTopOf="@+id/et_profilename"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/view_all_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:text="View all"
-            app:layout_constraintBaseline_toBaselineOf="@+id/bt_save_profile"
-            app:layout_constraintStart_toEndOf="@+id/bt_save_profile" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_statusBMI"
+            app:layout_constraintEnd_toEndOf="@+id/deletebutton"
+            app:layout_constraintStart_toStartOf="@+id/bt_save_profile" />
 
         <Button
             android:id="@+id/deletebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Delete"
-            app:layout_constraintBaseline_toBaselineOf="@+id/view_all_button"
-            app:layout_constraintStart_toEndOf="@+id/view_all_button" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/bt_save_profile"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_profile"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/bt_save_profile" />
 
         <EditText
             android:id="@+id/et_profilename"
-            android:layout_width="202dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="24dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="268dp"
             android:ems="10"
             android:gravity="right"
             android:hint="Name"
             android:inputType="textPersonName"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

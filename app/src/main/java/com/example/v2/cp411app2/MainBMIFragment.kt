@@ -1,5 +1,6 @@
 package com.example.v2.cp411app2
 
+import android.app.AlertDialog
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.support.v4.app.Fragment
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.main_bmi_fragment.*
  * CREATED BY: Ivan Vu
  * LAST UPDATE: 12DEC2018
  * LAST UPDATED BY: Ivan Vu
- * TODO: fix IF/ELSE into function for easy read*/
+ * TODO: convert to databind landscape*/
 class MainBMIFragment : Fragment() {
 
 
@@ -47,40 +48,40 @@ class MainBMIFragment : Fragment() {
         //Opening SQLite
         val dbEntry: DatabaseProfile = DatabaseProfile(activity)
         super.onViewCreated(view, savedInstanceState)
-        val listSign = arrayOf("Ivan", "Sunny", "Dom", "New Profile")
+
+
+        val listSign = arrayOf("Ivan", "Sunny", "Dom")
         spinner_profile.adapter = ArrayAdapter(activity, R.layout.spinner_item, listSign)
         spinner_profile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                //TODO do stuff when a profile is selected
-                val isInserted = dbEntry.insertData(spinner_profile.selectedItem.toString(),
-                        et_feet.text.toString(),
-                        et_inches.text.toString(),
-                        et_pound.text.toString())
+                //Tdo stuff when a profile is selected
+                val isInserted= dbEntry.insertData(spinner_profile.selectedItem.toString(),"","","")
 
-                if (isInserted)
-                    Toast.makeText(activity, "Data Inserted", Toast.LENGTH_SHORT).show()
-                else {
-                    Toast.makeText(activity, "Data not Inserted", Toast.LENGTH_SHORT).show()
-                    val res = dbEntry.onSelected(spinner_profile.selectedItem.toString()) //Set cursor to the selected profile according to the spinner
+               if (isInserted){
+                   //Toast.makeText(activity, "Profile added", Toast.LENGTH_SHORT).show()
+                   et_feet.setText("")
+                   et_inches.setText("")
+                   et_pound.setText("")
+               }
 
+                val res = dbEntry.onSelected(spinner_profile.selectedItem.toString()) //Set cursor to the selected profile according to the spinner
                     if (res.count == 0) { //if number of row is 0 then show no data found.
-                        Toast.makeText(activity, "No Data Found", Toast.LENGTH_SHORT).show()
+                        showMessage("Error", "No Data Found")
                     }
                     else {
                         res.moveToFirst()
-                        et_feet.setText( res.getString(res.getColumnIndex("FEET")))
+                        et_feet.setText(res.getString(res.getColumnIndex("FEET")))
                         et_inches.setText( res.getString(res.getColumnIndex("INCHES")))
                         et_pound.setText( res.getString(res.getColumnIndex("POUND")))
                     }
-
-
-                }
             }
         }
 
-        add_button.setOnClickListener {
+/**
+ * DESC: too add data into database
+ *       add_button.setOnClickListener {
             val isInserted = dbEntry.insertData(spinner_profile.selectedItem.toString(),
                     et_feet.text.toString(),
                     et_inches.text.toString(),
@@ -89,12 +90,13 @@ class MainBMIFragment : Fragment() {
                 Toast.makeText(activity, "Data Inserted", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(activity, "Data not Inserted", Toast.LENGTH_SHORT).show()
-        }
+        }*/
+
         view_all_button.setOnClickListener {
             val res = dbEntry.allData
             if (res.count == 0) {
                 // show message
-                Toast.makeText(activity, "No Data Found", Toast.LENGTH_SHORT).show()
+                showMessage("Error", "No Data Found")
                 return@setOnClickListener
             }
             else{
@@ -108,29 +110,47 @@ class MainBMIFragment : Fragment() {
                 }
 
                 // Show all data
-                Toast.makeText(activity, buffer.toString(), Toast.LENGTH_SHORT).show()
+                showMessage("All Profile", buffer.toString())
             }
         }
 
         bt_save_profile.setOnClickListener {
+            dbEntry.insertData(spinner_profile.selectedItem.toString(),
+                    et_feet.text.toString(),
+                    et_inches.text.toString(),
+                    et_pound.text.toString())
+
             val isUpdate = dbEntry.updateData(spinner_profile.selectedItem.toString(),
                     et_feet.text.toString(),
                     et_inches.text.toString(),
                     et_pound.text.toString())
-            if (isUpdate == true)
-                Toast.makeText(activity, "Data Update", Toast.LENGTH_SHORT).show()
+            if (isUpdate)
+                Toast.makeText(activity, "Profile saved", Toast.LENGTH_SHORT).show()
             else
-                Toast.makeText(activity, "Data not Updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Profile did not save", Toast.LENGTH_SHORT).show()
         }
 
 
         deletebutton.setOnClickListener {
             val deletedRows = dbEntry.deleteData(spinner_profile.selectedItem.toString())
-            if(deletedRows!! > 0)
-                Toast.makeText(activity,"Data Deleted",Toast.LENGTH_SHORT).show()
+            if(deletedRows!! > 0) {
+                et_feet.setText("")
+                et_inches.setText("")
+                et_pound.setText("")
+                Toast.makeText(activity, "Profile Deleted", Toast.LENGTH_SHORT).show()
+            }
             else
-                Toast.makeText(activity,"Data not Deleted",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"Profile did not delete",Toast.LENGTH_SHORT).show()
         }
+
+    }
+
+    private fun showMessage(title: String, Message: String) {
+        val builder = AlertDialog.Builder(activity)
+        builder.setCancelable(true)
+        builder.setTitle(title)
+        builder.setMessage(Message)
+        builder.show()
     }
 
     companion object {
